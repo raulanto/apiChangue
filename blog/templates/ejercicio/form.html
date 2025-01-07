@@ -1,0 +1,76 @@
+{% extends '.base.html' %}
+{% block content %}
+
+
+    <form method="post" action=".">
+
+        <div class="card mx-5">
+            <div class="card-header">
+                <h3 class="card-title"><h4> {{ titulo }}</h4></h3>
+            </div>
+
+            <div class="card-body">
+                {% csrf_token %}
+                {#      Otra forma          #}
+                {#                {% for visible_field in form.visible_fields %}#}
+                {##}
+                {#                    <div class="mb-3 mt-3">#}
+                {#                        <label for="email">{{ visible_field.label }}:</label>#}
+                {#                        {{ visible_field }}#}
+                {#                    </div>#}
+                {#                {% endfor %}#}
+
+                {{ form.errors }}
+                <div class="mb-3 mt-3">
+                    <label for="email">{{ form.autor.label }}:</label>
+                    {{ form.autor }}
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="email">{{ form.nombre.label }}:</label>
+                    {{ form.nombre }}
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="email">{{ form.descripcion.label }}:</label>
+                    {{ form.descripcion }}
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="mb-3 mt-3">
+                            <label for="email">{{ form.duracion.label }}:</label>
+                            {{ form.duracion }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 mt-3">
+                            <label for="email">{{ form.repeticiones.label }}:</label>
+                            {{ form.repeticiones }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="mb-3 mt-3">
+                            <label for="email">{{ form.grupo_muscular.label }}:</label>
+                            {{ form.grupo_muscular }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 mt-3">
+                            <label for="email">{{ form.nivel_dificultad.label }}:</label>
+                            {{ form.nivel_dificultad }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{% url 'blog:ejercicio_list' %}">Cancelar</a>
+            </div>
+
+        </div>
+    </form>
+    <!-- /.card -->
+{% endblock %}

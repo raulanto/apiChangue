@@ -2,7 +2,7 @@
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 from pathlib import Path
-
+import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLED_APPS = [
@@ -33,7 +33,7 @@ ROOT_URLCONF = 'apiChangue.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR, '../templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,4 +71,12 @@ USE_I18N = True
 USE_TZ = True
 ALLOWED_HOSTS = ['*']
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
 
+# Configuración específica para aplicaciones de terceros
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+
+]

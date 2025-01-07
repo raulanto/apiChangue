@@ -8,7 +8,7 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
 from .CustomAuthToken import CustomAuthTokenAPI
-
+from django.contrib.auth import views as auth_views
 schema_view = get_schema_view(
     openapi.Info(
         title="Sensores API",
@@ -24,11 +24,15 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', lambda request: redirect('admin/', permanent=False)),
-    path('admin/', admin.site.urls),
-    path('api-token-auth/', CustomAuthTokenAPI.as_view()),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/v1/', include('blog.api.urls')),
-
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path('api-token-auth/', CustomAuthTokenAPI.as_view()),
+                  path('api-auth/', include('rest_framework.urls')),
+                  path('api/v1/', include('blog.api.urls')),
+                  path('', include('blog.urls')),
+                  path(
+                      'logout/',
+                      auth_views.LogoutView.as_view(template_name='index.html'),
+                      name='logout'
+                  ),
+                  path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

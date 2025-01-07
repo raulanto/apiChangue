@@ -1,0 +1,33 @@
+{% extends 'list.html' %}
+
+{% block columnas %}
+    <th scope="col">#</th>
+    <th scope="col">Autor</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Nivel Dificultad</th>
+    <th scope="col">Grupo Muscular</th>
+    <th scope="col">Fecha Creacion</th>
+    <th scope="col">...</th>
+{% endblock %}
+
+
+{% block datos %}
+    {% for ejercicio in ejercicios %}
+        <tr>
+            <th scope="row">{{ ejercicio.id }}</th>
+            <td>{{ ejercicio.autor }}</td>
+            <td>{{ ejercicio.nombre }}</td>
+            <td>{{ ejercicio.nivel_dificultad }}</td>
+            <td>{{ ejercicio.grupo_muscular }}</td>
+            <td>{{ ejercicio.fecha_creacion }}</td>
+            <td>
+                <div class="btn-group btn-group-xs" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger ">Editar</button>
+                    <button type="button" class="btn btn-warning">Eliminar</button>
+                    <button type="button" class="btn btn-success">Mostrar</button>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+

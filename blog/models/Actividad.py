@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Actividad(models.Model):
     dia = models.ForeignKey(
         'DiaSemana',

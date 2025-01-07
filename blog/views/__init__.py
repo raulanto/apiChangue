@@ -1,0 +1,1 @@
+from .ejercicio.view import EjercicioListView, EjercicioDetailView, EjercicioCreateView, EjercicioUpdateView, EjercicioDeleteView

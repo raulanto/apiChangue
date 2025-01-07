@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import model_to_dict
 
 
 class Ejercicio(models.Model):
-    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ejercicioAutor", verbose_name="Autor")
-
-    nombre = models.CharField(max_length=100, verbose_name="Nombre del ejercicio")
+    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ejercicioAutor", verbose_name="Autor",)
+    nombre = models.CharField(max_length=100, verbose_name="Nombre del ejercicio",unique=True)
     descripcion = models.TextField(blank=True, null=True, verbose_name="Descripción del ejercicio")
     duracion = models.PositiveIntegerField(verbose_name="Duración (en minutos)",
                                            help_text="Duración aproximada del ejercicio")
@@ -38,6 +38,9 @@ class Ejercicio(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def toJson(self):
+        return model_to_dict(self,exclude=['fecha_creacion','fecha_actualizacion'])
 
     class Meta:
         verbose_name = "Ejercicio"
